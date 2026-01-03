@@ -7,6 +7,11 @@
     <title>Ничего Неделание</title>
     <link rel="manifest" href="/manifest.json">
     <link rel="icon" href="/icon.png">
+    <!-- PWA meta -->
+    <meta name="theme-color" content="#1a1a1a">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="apple-touch-icon" href="/icon-192.png">
     <style>
         body { font-family: sans-serif; text-align: center; background: #1a1a1a; color: white; padding: 20px; }
         #timer { font-size: 3em; font-family: monospace; }
@@ -21,6 +26,10 @@
 <body>
 
 <h1>Ничего Неделание</h1>
+
+<button id="installBtn" style="display:none; background:#00ff88; color:black;">
+    Установить приложение
+</button>
 
 <div sec:authorize="isAuthenticated()">
     Привет,

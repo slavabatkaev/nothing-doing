@@ -3,6 +3,24 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const startBtn = document.getElementById('start');
   const cancelBtn = document.getElementById('cancel');
+  // ===== PWA install =====
+  let deferredPrompt = null;
+  const installBtn = document.getElementById('installBtn');
+
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    if (installBtn) installBtn.style.display = 'inline-block';
+  });
+
+  installBtn?.addEventListener('click', async () => {
+    if (!deferredPrompt) return;
+    deferredPrompt.prompt();
+    await deferredPrompt.userChoice;
+    deferredPrompt = null;
+    installBtn.style.display = 'none';
+  });
+
   console.log("startBtn =", startBtn, "cancelBtn =", cancelBtn);
 
   // если кнопки не найдены — дальше нет смысла
