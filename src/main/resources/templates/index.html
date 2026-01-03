@@ -32,12 +32,24 @@
 </button>
 
 <div sec:authorize="isAuthenticated()">
-    Привет,
-    <span sec:authentication="name"></span>!<br>
-    Всего неделания:
-    <span th:text="${totalHours}">0</span> ч
-    <span th:text="${totalMinutes}">0</span> мин
+    <div style="display:flex; justify-content:center; align-items:center; gap:12px; flex-wrap:wrap;">
+        <div>
+            Привет, <span sec:authentication="name"></span>!<br>
+            Всего неделания:
+            <span th:text="${totalHours}">0</span> ч
+            <span th:text="${totalMinutes}">0</span> мин
+        </div>
+
+        <form th:action="@{/logout}" method="post" style="margin:0;">
+            <button type="submit"
+                    style="background:#444; color:white; padding:10px 16px;
+                           border:none; border-radius:10px; cursor:pointer;">
+                Выйти
+            </button>
+        </form>
+    </div>
 </div>
+
 
 <div sec:authorize="!isAuthenticated()">
     Вы не вошли в систему
