@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Час Ничего Неделания</title>
+    <title>Ничего Неделание</title>
     <link rel="manifest" href="/manifest.json">
     <link rel="icon" href="/icon.png">
     <style>
@@ -20,7 +20,7 @@
 
 <body>
 
-<h1>Час Ничего Неделания</h1>
+<h1>Ничего Неделание</h1>
 
 <div sec:authorize="isAuthenticated()">
     Привет,
@@ -36,23 +36,41 @@
 
 <p class="quote" th:text="${quote}"></p>
 
+<p style="margin-top:10px;">
+    <a href="https://rutube.ru/video/ff8625f8125da590a6fdafc9d5311d97/?r=wd"
+       target="_blank"
+       style="color:#00ff88; text-decoration:none;">
+        5 минут о медитации (Навал Равикант) ▶
+    </a>
+</p>
+
+
 <div id="timer">15:00</div>
 <progress id="progress" value="0" max="100"></progress>
 
-<select id="duration">
-    <option value="300">5 минут</option>
-    <option value="600">10 минут</option>
-    <option value="900" selected>15 минут</option>
-    <option value="1800">30 минут</option>
-    <option value="3600">60 минут</option>
-</select>
+<div style="display:flex; justify-content:center; gap:14px; flex-wrap:wrap; margin-top:10px;">
+    <div>
+        <div style="color:#aaa; font-size:0.9em; margin-bottom:6px;">Длительность</div>
+        <select id="duration">
+            <option value="300">5 минут</option>
+            <option value="600">10 минут</option>
+            <option value="900" selected>15 минут</option>
+            <option value="1800">30 минут</option>
+            <option value="3600">60 минут</option>
+        </select>
+    </div>
 
-<select id="interval">
-    <option value="0">Без сигналов</option>
-    <option value="300">Каждые 5 мин</option>
-    <option value="600">Каждые 10 мин</option>
-    <option value="900">Каждые 15 мин</option>
-</select>
+    <div>
+        <div style="color:#aaa; font-size:0.9em; margin-bottom:6px;">Промежуточные сигналы</div>
+        <select id="interval">
+            <option value="0" selected>Без промежуточных сигналов</option>
+            <option value="300">Каждые 5 мин</option>
+            <option value="600">Каждые 10 мин</option>
+            <option value="900">Каждые 15 мин</option>
+        </select>
+    </div>
+</div>
+
 
 <br>
 <button id="start">Начать</button>
