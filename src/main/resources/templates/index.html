@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Час Ничего Неделания</title>
+    <link rel="manifest" href="/manifest.json">
+    <link rel="icon" href="/icon.png">
+    <style>
+        body { font-family: sans-serif; text-align: center; background: #1a1a1a; color: white; padding: 20px; }
+        #timer { font-size: 3em; font-family: monospace; }
+        button { padding: 15px 30px; font-size: 1.2em; margin: 10px; border: none; border-radius: 10px; cursor: pointer; }
+        #start { background: #00ff88; color: black; }
+        #cancel { background: #ff6b6b; color: white; }
+        .quote { font-style: italic; color: #aaa; margin: 20px; }
+        progress { width: 80%; height: 10px; }
+    </style>
+</head>
+
+<body>
+
+<h1>Час Ничего Неделания</h1>
+
+<div sec:authorize="isAuthenticated()">
+    Привет,
+    <span sec:authentication="name"></span>!<br>
+    Всего неделания:
+    <span th:text="${totalHours}">0</span> ч
+    <span th:text="${totalMinutes}">0</span> мин
+</div>
+
+<div sec:authorize="!isAuthenticated()">
+    Вы не вошли в систему
+</div>
+
+<p class="quote" th:text="${quote}"></p>
+
+<div id="timer">15:00</div>
+<progress id="progress" value="0" max="100"></progress>
+
+<select id="duration">
+    <option value="300">5 минут</option>
+    <option value="600">10 минут</option>
+    <option value="900" selected>15 минут</option>
+    <option value="1800">30 минут</option>
+    <option value="3600">60 минут</option>
+</select>
+
+<select id="interval">
+    <option value="0">Без сигналов</option>
+    <option value="300">Каждые 5 мин</option>
+    <option value="600">Каждые 10 мин</option>
+    <option value="900">Каждые 15 мин</option>
+</select>
+
+<br>
+<button id="start">Начать</button>
+<button id="cancel">Отмена</button>
+
+<audio id="start-sound" src="/sounds/start.mp3"></audio>
+<audio id="tick-sound" src="/sounds/tick.mp3"></audio>
+<audio id="end-sound" src="/sounds/end.mp3"></audio>
+
+<!-- 1) Пытаемся загрузить из CDN -->
+<script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/stompjs@2.3.3/lib/stomp.min.js"></script>
+
+<!-- 2) Если CDN не загрузился — подключаем локальные копии -->
+<script>
+    if (typeof SockJS === 'undefined') {
+      document.write('<script src="/js/vendor/sockjs.min.js"><\/script>');
+    }
+    if (typeof Stomp === 'undefined') {
+      document.write('<script src="/js/vendor/stomp.min.js"><\/script>');
+    }
+</script>
+
+<!-- 3) Твой код -->
+<script src="/js/app.js"></script>
+
+</body>
+</html>
