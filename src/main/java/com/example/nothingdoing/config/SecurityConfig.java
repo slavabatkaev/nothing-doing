@@ -22,6 +22,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(
                                 "/manifest.json",
+                                "/ws/**",
                                 "/sw.js",
                                 "/icon.png",
                                 "/register",
